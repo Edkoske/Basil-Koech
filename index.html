@@ -3,7 +3,8 @@
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Basil Koech — Leader, Speaker, Changemaker</title>
+  <title>Basil Koech — MCA Aspirant, Kedowa/Kimugul Ward 2027</title>
+  <meta name="description" content="Basil Koech — vying for Member of County Assembly (MCA), Kedowa/Kimugul Ward, Kericho County in 2027.">
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&amp;family=DM+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet">
@@ -26,7 +27,51 @@
             }
         }
     </script>
-  <link rel="stylesheet" href="styles.css">
+  <style>
+        body { font-family: 'DM Sans', sans-serif; }
+        h1,h2,h3,h4,h5,h6 { font-family: 'Poppins', sans-serif; }
+        .glass { background: rgba(255,255,255,0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.15); }
+        .dark .glass { background: rgba(0,0,0,0.3); border-color: rgba(255,255,255,0.1); }
+        .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+        .timeline-line { position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, #0F4C81, #2E8B57); }
+        @media(max-width:768px) { .timeline-line { left: 20px; } }
+        .typing-cursor { animation: blink 1s step-end infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+        .progress-fill { transition: width 1.5s ease; width: 0; }
+        .counter-section .count { font-variant-numeric: tabular-nums; }
+        .accordion-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+        .accordion-item.open .accordion-body { max-height: 500px; }
+        .accordion-item.open .accordion-icon { transform: rotate(180deg); }
+        .accordion-icon { transition: transform 0.3s ease; }
+        .testimonial-track { transition: transform 0.5s ease; }
+        #back-to-top { transition: opacity 0.3s; }
+        .campaign-badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            margin-bottom: 1rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #0F4C81;
+            background: rgba(15, 76, 129, 0.08);
+            border: 1px solid rgba(15, 76, 129, 0.15);
+        }
+        .dark .campaign-badge {
+            color: #D4AF37;
+            background: rgba(212, 175, 55, 0.1);
+            border-color: rgba(212, 175, 55, 0.25);
+        }
+        .campaign-card {
+            background: linear-gradient(135deg, #0F4C81 0%, #0a3a66 100%);
+            border-radius: 1rem;
+            padding: 2rem;
+            color: #fff;
+        }
+        @media (min-width: 768px) {
+            .campaign-card { padding: 2.5rem 3rem; }
+        }
+    </style>
  </head>
  <body data-template-id="__page-root" class="min-h-screen bg-white dark:bg-gray-950 text-charcoal dark:text-gray-100 transition-colors duration-300">
   <!-- Navbar -->
@@ -34,44 +79,86 @@
    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
     <a href="#hero" class="font-heading font-bold text-xl text-primary dark:text-accent">BK</a>
     <div class="hidden md:flex items-center gap-6 text-sm font-medium">
-     <a href="#about" class="hover:text-primary dark:hover:text-accent transition-colors">About</a> <a href="#experience" class="hover:text-primary dark:hover:text-accent transition-colors">Experience</a> <a href="#skills" class="hover:text-primary dark:hover:text-accent transition-colors">Skills</a> <a href="#projects" class="hover:text-primary dark:hover:text-accent transition-colors">Projects</a> <a href="#gallery" class="hover:text-primary dark:hover:text-accent transition-colors">Gallery</a> <a href="#testimonials" class="hover:text-primary dark:hover:text-accent transition-colors">Testimonials</a> <a href="#contact" class="hover:text-primary dark:hover:text-accent transition-colors">Contact</a>
+     <a href="#campaign" class="hover:text-primary dark:hover:text-accent transition-colors">Campaign</a>
+     <a href="#about" class="hover:text-primary dark:hover:text-accent transition-colors">About</a>
+     <a href="#experience" class="hover:text-primary dark:hover:text-accent transition-colors">Experience</a>
+     <a href="#skills" class="hover:text-primary dark:hover:text-accent transition-colors">Skills</a>
+     <a href="#projects" class="hover:text-primary dark:hover:text-accent transition-colors">Projects</a>
+     <a href="#gallery" class="hover:text-primary dark:hover:text-accent transition-colors">Gallery</a>
+     <a href="#testimonials" class="hover:text-primary dark:hover:text-accent transition-colors">Testimonials</a>
+     <a href="#contact" class="hover:text-primary dark:hover:text-accent transition-colors">Contact</a>
     </div>
     <div class="flex items-center gap-3">
-     <button id="theme-toggle" aria-label="Toggle dark mode" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors"> <i data-lucide="sun" class="w-5 h-5 hidden dark:block"></i> <i data-lucide="moon" class="w-5 h-5 block dark:hidden"></i> </button> <button id="mobile-menu-btn" aria-label="Open menu" class="md:hidden p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800"> <i data-lucide="menu" class="w-5 h-5"></i> </button>
+     <button id="theme-toggle" aria-label="Toggle dark mode" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors"> <i data-lucide="sun" class="w-5 h-5 hidden dark:block"></i> <i data-lucide="moon" class="w-5 h-5 block dark:hidden"></i> </button>
+     <button id="mobile-menu-btn" aria-label="Open menu" class="md:hidden p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800"> <i data-lucide="menu" class="w-5 h-5"></i> </button>
     </div>
    </div>
    <div id="mobile-menu" class="hidden md:hidden px-4 pb-4 space-y-2 text-sm font-medium">
-    <a href="#about" class="block py-2 hover:text-primary">About</a> <a href="#experience" class="block py-2 hover:text-primary">Experience</a> <a href="#skills" class="block py-2 hover:text-primary">Skills</a> <a href="#projects" class="block py-2 hover:text-primary">Projects</a> <a href="#gallery" class="block py-2 hover:text-primary">Gallery</a> <a href="#testimonials" class="block py-2 hover:text-primary">Testimonials</a> <a href="#contact" class="block py-2 hover:text-primary">Contact</a>
+    <a href="#campaign" class="block py-2 hover:text-primary">Campaign</a>
+    <a href="#about" class="block py-2 hover:text-primary">About</a>
+    <a href="#experience" class="block py-2 hover:text-primary">Experience</a>
+    <a href="#skills" class="block py-2 hover:text-primary">Skills</a>
+    <a href="#projects" class="block py-2 hover:text-primary">Projects</a>
+    <a href="#gallery" class="block py-2 hover:text-primary">Gallery</a>
+    <a href="#testimonials" class="block py-2 hover:text-primary">Testimonials</a>
+    <a href="#contact" class="block py-2 hover:text-primary">Contact</a>
    </div>
   </nav><!-- Hero -->
   <section id="hero" class="relative pt-24 pb-16 md:pt-32 md:pb-24 overflow-hidden">
    <div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 dark:from-primary/10 dark:to-secondary/10"></div>
    <div class="max-w-7xl mx-auto px-4 relative z-10 flex flex-col md:flex-row items-center gap-10">
     <div class="flex-1 text-center md:text-left">
+     <a href="#campaign" data-template-id="hero-campaign-badge" class="campaign-badge canva-text"></a>
      <p data-template-id="hero-greeting" class="canva-text text-secondary font-semibold mb-2 text-lg"></p>
      <h1 class="font-heading font-extrabold text-4xl md:text-6xl leading-tight mb-4"><span data-template-id="hero-name" class="canva-text text-primary dark:text-white"></span><br><span id="typed-text" class="text-accent"></span><span class="typing-cursor text-accent">|</span></h1>
      <p data-template-id="hero-tagline" class="canva-text text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-lg"></p>
      <div class="flex flex-wrap gap-4 justify-center md:justify-start">
-      <a href="#about" data-template-id="hero-cta-about" class="canva-button px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition-colors"></a> <a href="#projects" data-template-id="hero-cta-work" class="canva-button px-6 py-3 border-2 border-primary text-primary dark:text-white rounded-lg font-semibold hover:bg-primary/10 transition-colors"></a> <a href="#contact" data-template-id="hero-cta-contact" class="canva-button px-6 py-3 bg-accent text-white rounded-lg font-semibold hover:bg-accent/90 transition-colors"></a>
+      <a href="#campaign" data-template-id="hero-cta-contact" class="canva-button px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition-colors"></a>
+      <a href="#projects" data-template-id="hero-cta-work" class="canva-button px-6 py-3 border-2 border-primary text-primary dark:text-white rounded-lg font-semibold hover:bg-primary/10 transition-colors"></a>
+      <a href="#about" data-template-id="hero-cta-about" class="canva-button px-6 py-3 bg-accent text-white rounded-lg font-semibold hover:bg-accent/90 transition-colors"></a>
      </div>
     </div>
     <div class="flex-shrink-0">
-    <div class="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-accent shadow-2xl">
-    <img src="assets/images/hero-portrait.jpg" data-template-id="hero-portrait" alt="Hero portrait" class="canva-image w-full h-full object-cover" loading="lazy">
+     <div class="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-accent shadow-2xl">
+      <img data-template-id="hero-portrait" alt="Basil Koech" class="canva-image w-full h-full object-cover" loading="eager">
+     </div>
     </div>
+   </div>
+  </section><!-- Campaign -->
+  <section id="campaign" class="py-16 md:py-20 bg-gray-50 dark:bg-gray-900">
+   <div class="max-w-7xl mx-auto px-4">
+    <div class="fade-up campaign-card">
+     <p data-template-id="campaign-eyebrow" class="canva-text text-accent text-sm font-semibold uppercase tracking-wider mb-2"></p>
+     <h2 data-template-id="campaign-heading" class="canva-text font-heading font-bold text-2xl md:text-3xl mb-4"></h2>
+     <p data-template-id="campaign-desc" class="canva-text text-white/90 leading-relaxed max-w-3xl mb-8"></p>
+     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+      <div class="glass rounded-xl p-5">
+       <h3 data-template-id="campaign-pillar-1-title" class="canva-text font-heading font-semibold text-accent mb-2"></h3>
+       <p data-template-id="campaign-pillar-1-desc" class="canva-text text-sm text-white/80"></p>
+      </div>
+      <div class="glass rounded-xl p-5">
+       <h3 data-template-id="campaign-pillar-2-title" class="canva-text font-heading font-semibold text-accent mb-2"></h3>
+       <p data-template-id="campaign-pillar-2-desc" class="canva-text text-sm text-white/80"></p>
+      </div>
+      <div class="glass rounded-xl p-5">
+       <h3 data-template-id="campaign-pillar-3-title" class="canva-text font-heading font-semibold text-accent mb-2"></h3>
+       <p data-template-id="campaign-pillar-3-desc" class="canva-text text-sm text-white/80"></p>
+      </div>
+     </div>
+     <a href="#contact" data-template-id="campaign-cta" class="canva-button inline-block px-6 py-3 bg-accent text-white rounded-lg font-semibold hover:bg-accent/90 transition-colors"></a>
     </div>
    </div>
   </section><!-- About -->
-  <section id="about" class="py-20 bg-gray-50 dark:bg-gray-900">
+  <section id="about" class="py-20 bg-white dark:bg-gray-950">
    <div class="max-w-7xl mx-auto px-4">
     <div class="fade-up text-center mb-12">
      <h2 data-template-id="about-heading" class="canva-text font-heading font-bold text-3xl md:text-4xl text-primary dark:text-white mb-4"></h2>
      <div class="w-20 h-1 bg-accent mx-auto"></div>
     </div>
     <div class="fade-up flex flex-col lg:flex-row gap-12 items-center">
-    <div class="lg:w-2/5">
-    <img src="assets/images/about-image.jpg" data-template-id="about-image" alt="About image" class="canva-image w-full h-80 object-cover rounded-2xl shadow-xl" loading="lazy">
-    </div>
+     <div class="lg:w-2/5">
+      <img data-template-id="about-image" alt="About Basil Koech" class="canva-image w-full h-80 object-cover rounded-2xl shadow-xl" loading="lazy">
+     </div>
      <div class="lg:w-3/5 space-y-4">
       <p data-template-id="about-bio" class="canva-text text-gray-700 dark:text-gray-300 leading-relaxed"></p>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
@@ -92,7 +179,7 @@
     </div>
    </div>
   </section><!-- Experience -->
-  <section id="experience" class="py-20">
+  <section id="experience" class="py-20 bg-gray-50 dark:bg-gray-900">
    <div class="max-w-7xl mx-auto px-4">
     <div class="fade-up text-center mb-12">
      <h2 data-template-id="experience-heading" class="canva-text font-heading font-bold text-3xl md:text-4xl text-primary dark:text-white mb-4"></h2>
@@ -144,7 +231,7 @@
     </div>
    </div>
   </section><!-- Education -->
-  <section id="education" class="py-20 bg-gray-50 dark:bg-gray-900">
+  <section id="education" class="py-20">
    <div class="max-w-7xl mx-auto px-4">
     <div class="fade-up text-center mb-12">
      <h2 data-template-id="education-heading" class="canva-text font-heading font-bold text-3xl md:text-4xl text-primary dark:text-white mb-4"></h2>
@@ -158,13 +245,13 @@
       <p data-template-id="edu-1-detail" class="canva-text text-sm text-gray-500 dark:text-gray-400 mt-1"></p>
      </div>
      <div data-template-id="edu-2-card" class="canva-card glass rounded-xl p-6 text-center">
-      <div class="w-14 h-14 rounded-full bg-secondary/10 dark:bg-secondary/20 flex items-center justify-center mx-auto mb-4"><i data-lucide="award" class="w-7 h-7 text-secondary"></i>
+      <div class="w-14 h-14 rounded-full bg-secondary/10 dark:bg-secondary/20 flex items-center justify-center mx-auto mb-4"><i data-lucide="school" class="w-7 h-7 text-secondary"></i>
       </div>
       <h3 data-template-id="edu-2-title" class="canva-text font-heading font-semibold"></h3>
       <p data-template-id="edu-2-detail" class="canva-text text-sm text-gray-500 dark:text-gray-400 mt-1"></p>
      </div>
      <div data-template-id="edu-3-card" class="canva-card glass rounded-xl p-6 text-center">
-      <div class="w-14 h-14 rounded-full bg-accent/10 dark:bg-accent/20 flex items-center justify-center mx-auto mb-4"><i data-lucide="book-open" class="w-7 h-7 text-accent"></i>
+      <div class="w-14 h-14 rounded-full bg-accent/10 dark:bg-accent/20 flex items-center justify-center mx-auto mb-4"><i data-lucide="award" class="w-7 h-7 text-accent"></i>
       </div>
       <h3 data-template-id="edu-3-title" class="canva-text font-heading font-semibold"></h3>
       <p data-template-id="edu-3-detail" class="canva-text text-sm text-gray-500 dark:text-gray-400 mt-1"></p>
@@ -172,7 +259,7 @@
     </div>
    </div>
   </section><!-- Skills -->
-  <section id="skills" class="py-20">
+  <section id="skills" class="py-20 bg-gray-50 dark:bg-gray-900">
    <div class="max-w-7xl mx-auto px-4">
     <div class="fade-up text-center mb-12">
      <h2 data-template-id="skills-heading" class="canva-text font-heading font-bold text-3xl md:text-4xl text-primary dark:text-white mb-4"></h2>
@@ -180,65 +267,41 @@
     </div>
     <div class="fade-up grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto" id="skills-grid">
      <div class="space-y-2">
-      <div class="flex justify-between"><span data-template-id="skill-1-name" class="canva-text font-medium text-sm"></span><span class="text-sm text-gray-500">95%</span>
-      </div>
-      <div class="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-       <div class="progress-fill h-full bg-primary rounded-full" data-width="95"></div>
-      </div>
+      <div class="flex justify-between"><span data-template-id="skill-1-name" class="canva-text font-medium text-sm"></span><span class="text-sm text-gray-500">95%</span></div>
+      <div class="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden"><div class="progress-fill h-full bg-primary rounded-full" data-width="95"></div></div>
      </div>
      <div class="space-y-2">
-      <div class="flex justify-between"><span data-template-id="skill-2-name" class="canva-text font-medium text-sm"></span><span class="text-sm text-gray-500">90%</span>
-      </div>
-      <div class="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-       <div class="progress-fill h-full bg-secondary rounded-full" data-width="90"></div>
-      </div>
+      <div class="flex justify-between"><span data-template-id="skill-2-name" class="canva-text font-medium text-sm"></span><span class="text-sm text-gray-500">90%</span></div>
+      <div class="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden"><div class="progress-fill h-full bg-secondary rounded-full" data-width="90"></div></div>
      </div>
      <div class="space-y-2">
-      <div class="flex justify-between"><span data-template-id="skill-3-name" class="canva-text font-medium text-sm"></span><span class="text-sm text-gray-500">88%</span>
-      </div>
-      <div class="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-       <div class="progress-fill h-full bg-accent rounded-full" data-width="88"></div>
-      </div>
+      <div class="flex justify-between"><span data-template-id="skill-3-name" class="canva-text font-medium text-sm"></span><span class="text-sm text-gray-500">88%</span></div>
+      <div class="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden"><div class="progress-fill h-full bg-accent rounded-full" data-width="88"></div></div>
      </div>
      <div class="space-y-2">
-      <div class="flex justify-between"><span data-template-id="skill-4-name" class="canva-text font-medium text-sm"></span><span class="text-sm text-gray-500">92%</span>
-      </div>
-      <div class="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-       <div class="progress-fill h-full bg-primary rounded-full" data-width="92"></div>
-      </div>
+      <div class="flex justify-between"><span data-template-id="skill-4-name" class="canva-text font-medium text-sm"></span><span class="text-sm text-gray-500">92%</span></div>
+      <div class="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden"><div class="progress-fill h-full bg-primary rounded-full" data-width="92"></div></div>
      </div>
      <div class="space-y-2">
-      <div class="flex justify-between"><span data-template-id="skill-5-name" class="canva-text font-medium text-sm"></span><span class="text-sm text-gray-500">87%</span>
-      </div>
-      <div class="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-       <div class="progress-fill h-full bg-secondary rounded-full" data-width="87"></div>
-      </div>
+      <div class="flex justify-between"><span data-template-id="skill-5-name" class="canva-text font-medium text-sm"></span><span class="text-sm text-gray-500">87%</span></div>
+      <div class="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden"><div class="progress-fill h-full bg-secondary rounded-full" data-width="87"></div></div>
      </div>
      <div class="space-y-2">
-      <div class="flex justify-between"><span data-template-id="skill-6-name" class="canva-text font-medium text-sm"></span><span class="text-sm text-gray-500">93%</span>
-      </div>
-      <div class="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-       <div class="progress-fill h-full bg-accent rounded-full" data-width="93"></div>
-      </div>
+      <div class="flex justify-between"><span data-template-id="skill-6-name" class="canva-text font-medium text-sm"></span><span class="text-sm text-gray-500">93%</span></div>
+      <div class="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden"><div class="progress-fill h-full bg-accent rounded-full" data-width="93"></div></div>
      </div>
      <div class="space-y-2">
-      <div class="flex justify-between"><span data-template-id="skill-7-name" class="canva-text font-medium text-sm"></span><span class="text-sm text-gray-500">89%</span>
-      </div>
-      <div class="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-       <div class="progress-fill h-full bg-primary rounded-full" data-width="89"></div>
-      </div>
+      <div class="flex justify-between"><span data-template-id="skill-7-name" class="canva-text font-medium text-sm"></span><span class="text-sm text-gray-500">89%</span></div>
+      <div class="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden"><div class="progress-fill h-full bg-primary rounded-full" data-width="89"></div></div>
      </div>
      <div class="space-y-2">
-      <div class="flex justify-between"><span data-template-id="skill-8-name" class="canva-text font-medium text-sm"></span><span class="text-sm text-gray-500">85%</span>
-      </div>
-      <div class="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-       <div class="progress-fill h-full bg-secondary rounded-full" data-width="85"></div>
-      </div>
+      <div class="flex justify-between"><span data-template-id="skill-8-name" class="canva-text font-medium text-sm"></span><span class="text-sm text-gray-500">85%</span></div>
+      <div class="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden"><div class="progress-fill h-full bg-secondary rounded-full" data-width="85"></div></div>
      </div>
     </div>
    </div>
   </section><!-- Projects -->
-  <section id="projects" class="py-20 bg-gray-50 dark:bg-gray-900">
+  <section id="projects" class="py-20">
    <div class="max-w-7xl mx-auto px-4">
     <div class="fade-up text-center mb-12">
      <h2 data-template-id="projects-heading" class="canva-text font-heading font-bold text-3xl md:text-4xl text-primary dark:text-white mb-4"></h2>
@@ -246,52 +309,49 @@
     </div>
     <div class="fade-up grid grid-cols-1 md:grid-cols-3 gap-8">
      <div class="rounded-2xl overflow-hidden shadow-lg bg-white dark:bg-gray-800">
-    <img src="assets/images/project-1.jpg" data-template-id="project-1-img" alt="Project 1" class="canva-image w-full h-48 object-cover" loading="lazy">
+      <img data-template-id="project-1-img" alt="Project 1" class="canva-image w-full h-48 object-cover" loading="lazy">
       <div class="p-5">
        <h3 data-template-id="project-1-title" class="canva-text font-heading font-semibold text-lg"></h3>
-       <p data-template-id="project-1-desc" class="canva-text text-sm text-gray-600 dark:text-gray-300 mt-2"></p><span data-template-id="project-1-impact" class="canva-tag inline-block mt-3 text-xs font-semibold px-3 py-1 rounded-full bg-secondary/10 text-secondary"></span>
+       <p data-template-id="project-1-desc" class="canva-text text-sm text-gray-600 dark:text-gray-300 mt-2"></p>
+       <span data-template-id="project-1-impact" class="canva-tag inline-block mt-3 text-xs font-semibold px-3 py-1 rounded-full bg-secondary/10 text-secondary"></span>
       </div>
      </div>
      <div class="rounded-2xl overflow-hidden shadow-lg bg-white dark:bg-gray-800">
-    <img src="assets/images/project-2.jpg" data-template-id="project-2-img" alt="Project 2" class="canva-image w-full h-48 object-cover" loading="lazy">
+      <img data-template-id="project-2-img" alt="Project 2" class="canva-image w-full h-48 object-cover" loading="lazy">
       <div class="p-5">
        <h3 data-template-id="project-2-title" class="canva-text font-heading font-semibold text-lg"></h3>
-       <p data-template-id="project-2-desc" class="canva-text text-sm text-gray-600 dark:text-gray-300 mt-2"></p><span data-template-id="project-2-impact" class="canva-tag inline-block mt-3 text-xs font-semibold px-3 py-1 rounded-full bg-primary/10 text-primary"></span>
+       <p data-template-id="project-2-desc" class="canva-text text-sm text-gray-600 dark:text-gray-300 mt-2"></p>
+       <span data-template-id="project-2-impact" class="canva-tag inline-block mt-3 text-xs font-semibold px-3 py-1 rounded-full bg-primary/10 text-primary"></span>
       </div>
      </div>
      <div class="rounded-2xl overflow-hidden shadow-lg bg-white dark:bg-gray-800">
-    <img src="assets/images/project-3.jpg" data-template-id="project-3-img" alt="Project 3" class="canva-image w-full h-48 object-cover" loading="lazy">
+      <img data-template-id="project-3-img" alt="Project 3" class="canva-image w-full h-48 object-cover" loading="lazy">
       <div class="p-5">
        <h3 data-template-id="project-3-title" class="canva-text font-heading font-semibold text-lg"></h3>
-       <p data-template-id="project-3-desc" class="canva-text text-sm text-gray-600 dark:text-gray-300 mt-2"></p><span data-template-id="project-3-impact" class="canva-tag inline-block mt-3 text-xs font-semibold px-3 py-1 rounded-full bg-accent/10 text-accent"></span>
+       <p data-template-id="project-3-desc" class="canva-text text-sm text-gray-600 dark:text-gray-300 mt-2"></p>
+       <span data-template-id="project-3-impact" class="canva-tag inline-block mt-3 text-xs font-semibold px-3 py-1 rounded-full bg-accent/10 text-accent"></span>
       </div>
      </div>
     </div>
    </div>
   </section><!-- Gallery -->
-  <section id="gallery" class="py-20">
+  <section id="gallery" class="py-20 bg-gray-50 dark:bg-gray-900">
    <div class="max-w-7xl mx-auto px-4">
     <div class="fade-up text-center mb-12">
      <h2 data-template-id="gallery-heading" class="canva-text font-heading font-bold text-3xl md:text-4xl text-primary dark:text-white mb-4"></h2>
      <div class="w-20 h-1 bg-accent mx-auto"></div>
     </div>
     <div class="fade-up grid grid-cols-2 md:grid-cols-3 md:grid-rows-2 gap-4">
-      <div class="rounded-xl overflow-hidden aspect-square"><img src="assets/images/gallery-1.jpg" data-template-id="gallery-img-1" alt="Gallery image 1" class="canva-image w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy">
-     </div>
-    <div class="rounded-xl overflow-hidden aspect-[3/4] md:row-span-2"><img src="assets/images/gallery-2.jpg" data-template-id="gallery-img-2" alt="Gallery image 2" class="canva-image w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy">
-     </div>
-    <div class="rounded-xl overflow-hidden aspect-square"><img src="assets/images/gallery-3.jpg" data-template-id="gallery-img-3" alt="Gallery image 3" class="canva-image w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy">
-     </div>
-    <div class="rounded-xl overflow-hidden aspect-square"><img src="assets/images/gallery-4.jpg" data-template-id="gallery-img-4" alt="Gallery image 4" class="canva-image w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy">
-     </div>
-    <div class="rounded-xl overflow-hidden aspect-square"><img src="assets/images/gallery-5.jpg" data-template-id="gallery-img-5" alt="Gallery image 5" class="canva-image w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy">
-     </div>
-    <div class="rounded-xl overflow-hidden aspect-square"><img src="assets/images/gallery-6.jpg" data-template-id="gallery-img-6" alt="Gallery image 6" class="canva-image w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy">
-     </div>
+     <div class="rounded-xl overflow-hidden aspect-square"><img data-template-id="gallery-img-1" alt="Gallery 1" class="canva-image w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy"></div>
+     <div class="rounded-xl overflow-hidden aspect-[3/4] md:row-span-2"><img data-template-id="gallery-img-2" alt="Gallery 2" class="canva-image w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy"></div>
+     <div class="rounded-xl overflow-hidden aspect-square"><img data-template-id="gallery-img-3" alt="Gallery 3" class="canva-image w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy"></div>
+     <div class="rounded-xl overflow-hidden aspect-square"><img data-template-id="gallery-img-4" alt="Gallery 4" class="canva-image w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy"></div>
+     <div class="rounded-xl overflow-hidden aspect-square"><img data-template-id="gallery-img-5" alt="Gallery 5" class="canva-image w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy"></div>
+     <div class="rounded-xl overflow-hidden aspect-square"><img data-template-id="gallery-img-6" alt="Gallery 6" class="canva-image w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy"></div>
     </div>
    </div>
   </section><!-- Testimonials -->
-  <section id="testimonials" class="py-20 bg-gray-50 dark:bg-gray-900">
+  <section id="testimonials" class="py-20">
    <div class="max-w-7xl mx-auto px-4">
     <div class="fade-up text-center mb-12">
      <h2 data-template-id="testimonials-heading" class="canva-text font-heading font-bold text-3xl md:text-4xl text-primary dark:text-white mb-4"></h2>
@@ -313,7 +373,9 @@
       </div>
      </div>
      <div class="flex justify-center gap-2 mt-6">
-      <button class="testimonial-dot w-3 h-3 rounded-full bg-accent" data-index="0" aria-label="Testimonial 1"></button> <button class="testimonial-dot w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600" data-index="1" aria-label="Testimonial 2"></button> <button class="testimonial-dot w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600" data-index="2" aria-label="Testimonial 3"></button>
+      <button class="testimonial-dot w-3 h-3 rounded-full bg-accent" data-index="0" aria-label="Testimonial 1"></button>
+      <button class="testimonial-dot w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600" data-index="1" aria-label="Testimonial 2"></button>
+      <button class="testimonial-dot w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600" data-index="2" aria-label="Testimonial 3"></button>
      </div>
     </div>
    </div>
@@ -333,17 +395,17 @@
       <p data-template-id="impact-stat-2" class="canva-text mt-2 text-sm opacity-80"></p>
      </div>
      <div>
-      <p class="count text-4xl md:text-5xl font-bold" data-target="3">0</p>
+      <p class="count text-4xl md:text-5xl font-bold" data-target="5" data-suffix="+">0</p>
       <p data-template-id="impact-stat-3" class="canva-text mt-2 text-sm opacity-80"></p>
      </div>
      <div>
-      <p class="count text-4xl md:text-5xl font-bold" data-target="5" data-suffix="+">0</p>
+      <p class="count text-4xl md:text-5xl font-bold" data-target="12" data-suffix="+">0</p>
       <p data-template-id="impact-stat-4" class="canva-text mt-2 text-sm opacity-80"></p>
      </div>
     </div>
    </div>
   </section><!-- Awards -->
-  <section id="awards" class="py-20">
+  <section id="awards" class="py-20 bg-gray-50 dark:bg-gray-900">
    <div class="max-w-7xl mx-auto px-4">
     <div class="fade-up text-center mb-12">
      <h2 data-template-id="awards-heading" class="canva-text font-heading font-bold text-3xl md:text-4xl text-primary dark:text-white mb-4"></h2>
@@ -351,30 +413,24 @@
     </div>
     <div class="fade-up grid grid-cols-1 md:grid-cols-3 gap-6">
      <div class="glass rounded-xl p-6 text-center">
-      <div class="text-4xl mb-3">
-       🏆
-      </div>
+      <div class="text-4xl mb-3">🏆</div>
       <h3 data-template-id="award-1-title" class="canva-text font-heading font-semibold"></h3>
       <p data-template-id="award-1-detail" class="canva-text text-sm text-gray-500 dark:text-gray-400 mt-1"></p>
      </div>
      <div class="glass rounded-xl p-6 text-center">
-      <div class="text-4xl mb-3">
-       🎖️
-      </div>
+      <div class="text-4xl mb-3">🎖️</div>
       <h3 data-template-id="award-2-title" class="canva-text font-heading font-semibold"></h3>
       <p data-template-id="award-2-detail" class="canva-text text-sm text-gray-500 dark:text-gray-400 mt-1"></p>
      </div>
      <div class="glass rounded-xl p-6 text-center">
-      <div class="text-4xl mb-3">
-       ⭐
-      </div>
+      <div class="text-4xl mb-3">⭐</div>
       <h3 data-template-id="award-3-title" class="canva-text font-heading font-semibold"></h3>
       <p data-template-id="award-3-detail" class="canva-text text-sm text-gray-500 dark:text-gray-400 mt-1"></p>
      </div>
     </div>
    </div>
   </section><!-- FAQ -->
-  <section id="faq" class="py-20 bg-gray-50 dark:bg-gray-900">
+  <section id="faq" class="py-20">
    <div class="max-w-3xl mx-auto px-4">
     <div class="fade-up text-center mb-12">
      <h2 data-template-id="faq-heading" class="canva-text font-heading font-bold text-3xl md:text-4xl text-primary dark:text-white mb-4"></h2>
@@ -382,19 +438,28 @@
     </div>
     <div class="fade-up space-y-3" id="faq-list">
      <div class="accordion-item glass rounded-xl overflow-hidden">
-      <button class="accordion-trigger w-full flex justify-between items-center p-5 text-left font-medium" aria-expanded="false"> <span data-template-id="faq-1-q" class="canva-text"></span> <i data-lucide="chevron-down" class="accordion-icon w-5 h-5 flex-shrink-0"></i> </button>
+      <button class="accordion-trigger w-full flex justify-between items-center p-5 text-left font-medium" aria-expanded="false">
+       <span data-template-id="faq-1-q" class="canva-text"></span>
+       <i data-lucide="chevron-down" class="accordion-icon w-5 h-5 flex-shrink-0"></i>
+      </button>
       <div class="accordion-body px-5 pb-5">
        <p data-template-id="faq-1-a" class="canva-text text-sm text-gray-600 dark:text-gray-300"></p>
       </div>
      </div>
      <div class="accordion-item glass rounded-xl overflow-hidden">
-      <button class="accordion-trigger w-full flex justify-between items-center p-5 text-left font-medium" aria-expanded="false"> <span data-template-id="faq-2-q" class="canva-text"></span> <i data-lucide="chevron-down" class="accordion-icon w-5 h-5 flex-shrink-0"></i> </button>
+      <button class="accordion-trigger w-full flex justify-between items-center p-5 text-left font-medium" aria-expanded="false">
+       <span data-template-id="faq-2-q" class="canva-text"></span>
+       <i data-lucide="chevron-down" class="accordion-icon w-5 h-5 flex-shrink-0"></i>
+      </button>
       <div class="accordion-body px-5 pb-5">
        <p data-template-id="faq-2-a" class="canva-text text-sm text-gray-600 dark:text-gray-300"></p>
       </div>
      </div>
      <div class="accordion-item glass rounded-xl overflow-hidden">
-      <button class="accordion-trigger w-full flex justify-between items-center p-5 text-left font-medium" aria-expanded="false"> <span data-template-id="faq-3-q" class="canva-text"></span> <i data-lucide="chevron-down" class="accordion-icon w-5 h-5 flex-shrink-0"></i> </button>
+      <button class="accordion-trigger w-full flex justify-between items-center p-5 text-left font-medium" aria-expanded="false">
+       <span data-template-id="faq-3-q" class="canva-text"></span>
+       <i data-lucide="chevron-down" class="accordion-icon w-5 h-5 flex-shrink-0"></i>
+      </button>
       <div class="accordion-body px-5 pb-5">
        <p data-template-id="faq-3-a" class="canva-text text-sm text-gray-600 dark:text-gray-300"></p>
       </div>
@@ -402,7 +467,7 @@
     </div>
    </div>
   </section><!-- Contact -->
-  <section id="contact" class="py-20">
+  <section id="contact" class="py-20 bg-gray-50 dark:bg-gray-900">
    <div class="max-w-7xl mx-auto px-4">
     <div class="fade-up text-center mb-12">
      <h2 data-template-id="contact-heading" class="canva-text font-heading font-bold text-3xl md:text-4xl text-primary dark:text-white mb-4"></h2>
@@ -411,20 +476,27 @@
     <div class="fade-up max-w-2xl mx-auto">
      <form id="contact-form" class="space-y-5">
       <div>
-       <label data-template-id="contact-name-label" for="contact-name" class="canva-text block text-sm font-medium mb-1"></label> <input id="contact-name" type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-primary outline-none transition">
+       <label data-template-id="contact-name-label" for="contact-name" class="canva-text block text-sm font-medium mb-1"></label>
+       <input id="contact-name" type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-primary outline-none transition">
       </div>
       <div>
-       <label data-template-id="contact-email-label" for="contact-email" class="canva-text block text-sm font-medium mb-1"></label> <input id="contact-email" type="email" required class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-primary outline-none transition">
+       <label data-template-id="contact-email-label" for="contact-email" class="canva-text block text-sm font-medium mb-1"></label>
+       <input id="contact-email" type="email" required class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-primary outline-none transition">
       </div>
       <div>
-       <label data-template-id="contact-message-label" for="contact-message" class="canva-text block text-sm font-medium mb-1"></label> <textarea id="contact-message" rows="5" required class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-primary outline-none transition resize-none"></textarea>
-      </div><button data-template-id="contact-submit-btn" type="submit" class="canva-button w-full py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary/90 transition-colors"></button>
+       <label data-template-id="contact-message-label" for="contact-message" class="canva-text block text-sm font-medium mb-1"></label>
+       <textarea id="contact-message" rows="5" required class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-primary outline-none transition resize-none"></textarea>
+      </div>
+      <button data-template-id="contact-submit-btn" type="submit" class="canva-button w-full py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary/90 transition-colors"></button>
      </form>
      <div id="contact-success" class="hidden mt-6 p-4 bg-secondary/10 text-secondary rounded-lg text-center font-medium">
       <span data-template-id="contact-success-msg" class="canva-text"></span>
      </div>
      <div class="flex justify-center gap-6 mt-8">
-      <a href="mailto:edisonkipkemoi319@gmail.com" aria-label="Email" class="p-3 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-primary/10 transition-colors"><i data-lucide="mail" class="w-5 h-5"></i></a> <a href="tel:+254710241295" aria-label="Phone" class="p-3 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-primary/10 transition-colors"><i data-lucide="phone" class="w-5 h-5"></i></a> <a href="#" aria-label="LinkedIn" class="p-3 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-primary/10 transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a> <a href="#" aria-label="Twitter" class="p-3 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-primary/10 transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+      <a href="mailto:edisonkipkemoi319@gmail.com" aria-label="Email" class="p-3 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-primary/10 transition-colors"><i data-lucide="mail" class="w-5 h-5"></i></a>
+      <a href="tel:+254710241295" aria-label="Phone" class="p-3 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-primary/10 transition-colors"><i data-lucide="phone" class="w-5 h-5"></i></a>
+      <a href="#" aria-label="LinkedIn" class="p-3 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-primary/10 transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+      <a href="#" aria-label="Twitter" class="p-3 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-primary/10 transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
      </div>
     </div>
    </div>
@@ -433,11 +505,15 @@
    <div class="max-w-7xl mx-auto px-4 text-center space-y-4">
     <p data-template-id="footer-text" class="canva-text text-sm"></p>
     <div class="flex justify-center gap-6 text-xs">
-     <a href="#" data-template-id="footer-privacy" class="canva-link hover:text-white transition-colors"></a> <a href="#" data-template-id="footer-terms" class="canva-link hover:text-white transition-colors"></a>
+     <a href="#" data-template-id="footer-privacy" class="canva-link hover:text-white transition-colors"></a>
+     <a href="#" data-template-id="footer-terms" class="canva-link hover:text-white transition-colors"></a>
     </div>
    </div>
-  </footer><!-- Back to top --> <button id="back-to-top" aria-label="Back to top" class="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-accent text-white shadow-lg flex items-center justify-center opacity-0 pointer-events-none z-50 hover:bg-accent/90 transition-colors"> <i data-lucide="chevron-up" class="w-6 h-6"></i> </button>
-  <script src="content.js" defer></script>
-  <script src="script.js" defer></script>
-</body>
+  </footer>
+  <button id="back-to-top" aria-label="Back to top" class="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-accent text-white shadow-lg flex items-center justify-center opacity-0 pointer-events-none z-50 hover:bg-accent/90 transition-colors">
+   <i data-lucide="chevron-up" class="w-6 h-6"></i>
+  </button>
+  <script src="content.js"></script>
+  <script src="script.js"></script>
+ </body>
 </html>

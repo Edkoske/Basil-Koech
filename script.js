@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    const phrases = ['Leader', 'Changemaker', 'Visionary', 'Speaker', 'Community Builder'];
+    const phrases = ['MCA Aspirant', 'Servant Leader', 'Changemaker', 'Visionary', 'Community Builder'];
     let pi = 0, ci = 0, deleting = false;
     const typedEl = document.getElementById('typed-text');
     function typeLoop() {
@@ -112,10 +112,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (success) success.classList.remove('hidden');
     });
 
-    const navbar = document.getElementById('navbar');
     const btt = document.getElementById('back-to-top');
     window.addEventListener('scroll', () => {
-        if (navbar) navbar.classList.toggle('shadow-md', window.scrollY > 50);
         if (!btt) return;
         if (window.scrollY > 500) { btt.style.opacity = '1'; btt.classList.remove('pointer-events-none'); }
         else { btt.style.opacity = '0'; btt.classList.add('pointer-events-none'); }
