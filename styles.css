@@ -1,0 +1,18 @@
+body { font-family: 'DM Sans', sans-serif; }
+h1,h2,h3,h4,h5,h6 { font-family: 'Poppins', sans-serif; }
+.glass { background: rgba(255,255,255,0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.15); }
+.dark .glass { background: rgba(0,0,0,0.3); border-color: rgba(255,255,255,0.1); }
+.fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.timeline-line { position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, #0F4C81, #2E8B57); }
+@media(max-width:768px) { .timeline-line { left: 20px; } }
+.typing-cursor { animation: blink 1s step-end infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.progress-fill { transition: width 1.5s ease; }
+.counter-section .count { font-variant-numeric: tabular-nums; }
+.accordion-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+.accordion-item.open .accordion-body { max-height: 500px; }
+.accordion-item.open .accordion-icon { transform: rotate(180deg); }
+.accordion-icon { transition: transform 0.3s ease; }
+.testimonial-track { transition: transform 0.5s ease; }
+#back-to-top { transition: opacity 0.3s; }
