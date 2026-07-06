@@ -85,14 +85,32 @@ document.addEventListener('DOMContentLoaded', () => {
     function goToSlide(i) {
         tIdx = i;
         if (track) track.style.transform = `translateX(-${i * 100}%)`;
-        dots.forEach((d, j) => {
-            d.classList.toggle('bg-accent', j === i);
-            d.classList.toggle('bg-gray-300', j !== i);
-            d.classList.toggle('dark:bg-gray-600', j !== i);
-        });
+        dots.forEach((d, j) => d.classList.toggle('active', j === i));
     }
     dots.forEach(d => d.addEventListener('click', () => goToSlide(+d.dataset.index)));
     setInterval(() => goToSlide((tIdx + 1) % 3), 5000);
+
+    const navbar = document.getElementById('navbar');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = [...navLinks].map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    const btt = document.getElementById('back-to-top');
+
+    function onScroll() {
+        if (navbar) navbar.classList.toggle('nav-scrolled', window.scrollY > 20);
+
+        const scrollPos = window.scrollY + 120;
+        let currentId = null;
+        sections.forEach(s => { if (s.offsetTop <= scrollPos) currentId = s.id; });
+        navLinks.forEach(a => {
+            a.classList.toggle('active', a.getAttribute('href') === '#' + currentId);
+        });
+
+        if (!btt) return;
+        if (window.scrollY > 500) { btt.style.opacity = '1'; btt.classList.remove('pointer-events-none'); }
+        else { btt.style.opacity = '0'; btt.classList.add('pointer-events-none'); }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
 
     document.querySelectorAll('.accordion-trigger').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -112,12 +130,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (success) success.classList.remove('hidden');
     });
 
-    const btt = document.getElementById('back-to-top');
-    window.addEventListener('scroll', () => {
-        if (!btt) return;
-        if (window.scrollY > 500) { btt.style.opacity = '1'; btt.classList.remove('pointer-events-none'); }
-        else { btt.style.opacity = '0'; btt.classList.add('pointer-events-none'); }
-    });
     if (btt) btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
     if (window.lucide && lucide.createIcons) lucide.createIcons();
