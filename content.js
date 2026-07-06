@@ -7,6 +7,7 @@ const SITE_CONTENT = {
     'hero-cta-contact': 'Join the Campaign',
     'hero-cta-work': 'My Vision',
     'hero-cta-about': 'Learn More',
+    'hero-cta-merch': 'Shop Merch',
 
     'campaign-eyebrow': '2027 County Assembly Election',
     'campaign-heading': 'Member of County Assembly — Kedowa/Kimugul Ward',
@@ -110,9 +111,17 @@ const SITE_CONTENT = {
     'contact-submit-btn': 'Send Message',
     'contact-success-msg': 'Thank you! Your message has been received. Together we can build a better Kedowa/Kimugul Ward.',
 
+    'merch-heading': 'Official Merch',
+    'merch-desc': 'Support Basil Koech with official Norfolk State University track & cross country NIL apparel — tees, hoodies, performance wear, and more.',
+    'merch-cta': 'Shop Now',
+
     'footer-text': '© 2026 Basil Koech · MCA Aspirant, Kedowa/Kimugul Ward 2027. All rights reserved.',
     'footer-privacy': 'Privacy Policy',
     'footer-terms': 'Terms of Use',
+};
+
+const SITE_LINKS = {
+    merch: 'https://www.tiktok.com/link/v2?aid=1988&lang=en&scene=bio_url&target=https%3A%2F%2Finfluxermerch.com%2Fathletes%2Fbasil-koech%3Futm_source%3DKlaviyo%26utm_medium%3Dflow%26utm_campaign%3DMessage%2520from%2520CEO%26utm_id%3DRamR7R%26_kx%3D4vP-hjFFFN-7QDuLPx79RdCy7tY-zc1R0n-bl6o6mGw.T65vSG',
 };
 
 const SITE_IMAGES = {
@@ -138,6 +147,13 @@ function populateContent() {
     Object.entries(SITE_IMAGES).forEach(([id, src]) => {
         document.querySelectorAll(`[data-template-id="${id}"]`).forEach(el => {
             if (el.tagName === 'IMG') el.src = src;
+        });
+    });
+    Object.entries(SITE_LINKS).forEach(([id, url]) => {
+        document.querySelectorAll(`[data-link-id="${id}"]`).forEach(el => {
+            el.href = url;
+            el.target = '_blank';
+            el.rel = 'noopener noreferrer';
         });
     });
 }
