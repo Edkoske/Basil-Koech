@@ -3,10 +3,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const html = document.documentElement;
     const toggle = document.getElementById('theme-toggle');
-    if (localStorage.getItem('theme') === 'dark') html.classList.add('dark');
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme === 'dark') html.classList.add('dark');
+    else if (!SiteSecurity.isValidTheme(storedTheme) && storedTheme !== null) localStorage.removeItem('theme');
     if (toggle) toggle.addEventListener('click', () => {
         html.classList.toggle('dark');
-        localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+        const theme = html.classList.contains('dark') ? 'dark' : 'light';
+        localStorage.setItem('theme', theme);
     });
 
     const mobileBtn = document.getElementById('mobile-menu-btn');
@@ -22,14 +25,14 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('a[href^="#"]').forEach(a => {
         a.addEventListener('click', e => {
             const href = a.getAttribute('href');
-            if (!href || href === '#') return;
+            if (!href || href === '#' || !SiteSecurity.isSafeFragment(href)) return;
             e.preventDefault();
-            const t = document.querySelector(href);
-            if (t) t.scrollIntoView({ behavior: 'smooth' });
+            const target = document.querySelector(href);
+            if (target) target.scrollIntoView({ behavior: 'smooth' });
         });
     });
 
-    const phrases = ['MCA Aspirant', 'Servant Leader', 'Changemaker', 'Visionary', 'Community Builder'];
+    const phrases = ['MCA Aspirant', 'Son of Kericho', 'Kedowa/Kimugul Leader', 'Ward Representative', 'Servant of Kenya'];
     let pi = 0, ci = 0, deleting = false;
     const typedEl = document.getElementById('typed-text');
     function typeLoop() {
@@ -50,7 +53,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const skillObs = new IntersectionObserver(entries => {
         entries.forEach(e => {
             if (e.isIntersecting) {
-                e.target.querySelectorAll('.progress-fill').forEach(bar => { bar.style.width = bar.dataset.width + '%'; });
+                e.target.querySelectorAll('.progress-fill').forEach(bar => {
+                    bar.style.width = SiteSecurity.clampPercent(bar.dataset.width) + '%';
+                });
                 skillObs.unobserve(e.target);
             }
         });
@@ -62,8 +67,8 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach(e => {
             if (e.isIntersecting) {
                 e.target.querySelectorAll('.count').forEach(el => {
-                    const target = +el.dataset.target;
-                    const suffix = el.dataset.suffix || '';
+                    const target = Math.max(0, Math.min(999999, Number(el.dataset.target) || 0));
+                    const suffix = SiteSecurity.sanitizeText(el.dataset.suffix || '', 8);
                     const step = Math.max(1, Math.ceil(target / 60));
                     let current = 0;
                     const timer = setInterval(() => {
@@ -82,17 +87,24 @@ document.addEventListener('DOMContentLoaded', () => {
     let tIdx = 0;
     const track = document.getElementById('testimonial-track');
     const dots = document.querySelectorAll('.testimonial-dot');
+    const slideCount = dots.length || 1;
     function goToSlide(i) {
-        tIdx = i;
-        if (track) track.style.transform = `translateX(-${i * 100}%)`;
-        dots.forEach((d, j) => d.classList.toggle('active', j === i));
+        const index = ((Number(i) % slideCount) + slideCount) % slideCount;
+        tIdx = index;
+        if (track) track.style.transform = `translateX(-${index * 100}%)`;
+        dots.forEach((d, j) => d.classList.toggle('active', j === index));
     }
-    dots.forEach(d => d.addEventListener('click', () => goToSlide(+d.dataset.index)));
-    setInterval(() => goToSlide((tIdx + 1) % 3), 5000);
+    dots.forEach(d => d.addEventListener('click', () => goToSlide(d.dataset.index)));
+    if (slideCount > 1) setInterval(() => goToSlide(tIdx + 1), 5000);
 
     const navbar = document.getElementById('navbar');
     const navLinks = document.querySelectorAll('.nav-link');
-    const sections = [...navLinks].map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    const sections = [...navLinks]
+        .map(a => {
+            const href = a.getAttribute('href');
+            return SiteSecurity.isSafeFragment(href) ? document.querySelector(href) : null;
+        })
+        .filter(Boolean);
     const btt = document.getElementById('back-to-top');
 
     function onScroll() {
@@ -118,13 +130,55 @@ document.addEventListener('DOMContentLoaded', () => {
             const open = item.classList.contains('open');
             document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('open'));
             if (!open) item.classList.add('open');
-            btn.setAttribute('aria-expanded', !open);
+            btn.setAttribute('aria-expanded', String(!open));
         });
     });
 
     const contactForm = document.getElementById('contact-form');
+    const contactError = document.getElementById('contact-error');
+    const RATE_LIMIT_MS = 60000;
+
+    function showContactError(message) {
+        if (!contactError) return;
+        contactError.textContent = message;
+        contactError.classList.remove('hidden');
+    }
+
+    function hideContactError() {
+        if (contactError) contactError.classList.add('hidden');
+    }
+
     if (contactForm) contactForm.addEventListener('submit', e => {
         e.preventDefault();
+        hideContactError();
+
+        const honeypot = document.getElementById('contact-website');
+        if (honeypot && honeypot.value.trim()) return;
+
+        const lastSubmit = Number(sessionStorage.getItem('contactLastSubmit') || 0);
+        if (Date.now() - lastSubmit < RATE_LIMIT_MS) {
+            showContactError('Please wait a moment before sending another message.');
+            return;
+        }
+
+        const name = SiteSecurity.sanitizeText(contactForm.elements['contact-name']?.value || '', 100);
+        const email = SiteSecurity.sanitizeText(contactForm.elements['contact-email']?.value || '', 254);
+        const message = SiteSecurity.sanitizeText(contactForm.elements['contact-message']?.value || '', 2000);
+
+        if (name.length < 2) {
+            showContactError('Please enter your name (at least 2 characters).');
+            return;
+        }
+        if (!SiteSecurity.isValidEmail(email)) {
+            showContactError('Please enter a valid email address.');
+            return;
+        }
+        if (message.length < 10) {
+            showContactError('Please enter a message (at least 10 characters).');
+            return;
+        }
+
+        sessionStorage.setItem('contactLastSubmit', String(Date.now()));
         contactForm.classList.add('hidden');
         const success = document.getElementById('contact-success');
         if (success) success.classList.remove('hidden');

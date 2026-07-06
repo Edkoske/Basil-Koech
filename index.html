@@ -3,29 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Basil Koech — MCA Aspirant, Kedowa/Kimugul Ward 2027</title>
-  <meta name="description" content="Basil Koech — vying for Member of County Assembly (MCA), Kedowa/Kimugul Ward, Kericho County in 2027.">
-  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests; script-src 'self' https://cdn.tailwindcss.com https://cdn.jsdelivr.net 'unsafe-inline' 'unsafe-eval'; style-src 'self' https://fonts.googleapis.com https://cdn.tailwindcss.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob:; connect-src 'self'; worker-src 'none'; manifest-src 'self'">
+  <title>Basil Koech — MCA Aspirant, Kedowa/Kimugul Ward, Kericho County, Kenya 2027</title>
+  <meta name="description" content="Basil Koech — Kenyan leader vying for MCA in Kedowa/Kimugul Ward, Kericho County. Grassroots development, accountable governance, and ward-first leadership for 2027.">
+  <meta name="keywords" content="Basil Koech, MCA, Kedowa Kimugul Ward, Kericho County, Kenya, 2027 election, County Assembly">
+  <meta name="robots" content="index, follow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script src="https://cdn.tailwindcss.com/3.4.17" referrerpolicy="no-referrer"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            primary: '#0B3D6E',
-            secondary: '#1A6B4A',
-            accent: '#B8942E',
-            charcoal: '#1A1F2E',
-          },
-          fontFamily: {
-            heading: ['Plus Jakarta Sans', 'sans-serif'],
-            body: ['Inter', 'sans-serif'],
+    if (typeof tailwind !== 'undefined') {
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              primary: '#0B3D6E',
+              secondary: '#1A6B4A',
+              accent: '#B8942E',
+              charcoal: '#1A1F2E',
+            },
+            fontFamily: {
+              heading: ['Plus Jakarta Sans', 'sans-serif'],
+              body: ['Inter', 'sans-serif'],
+            }
           }
         }
-      }
+      };
     }
   </script>
 </head>
@@ -36,7 +45,7 @@
     <div class="max-w-7xl mx-auto px-4 py-3.5 flex items-center justify-between">
       <a href="#hero" class="brand-mark">
         <span class="brand-name">Basil Koech</span>
-        <span class="brand-tagline">MCA 2027</span>
+        <span data-template-id="brand-tagline" class="brand-tagline"></span>
       </a>
       <div class="hidden md:flex items-center gap-8">
         <a href="#campaign" class="nav-link">Campaign</a>
@@ -60,15 +69,15 @@
       </div>
     </div>
     <div id="mobile-menu" class="hidden md:hidden px-4 pb-4 space-y-1">
-      <a href="#campaign">Campaign</a>
-      <a href="#about">About</a>
-      <a href="#experience">Experience</a>
-      <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#merch">Shop</a>
-      <a href="#testimonials">Testimonials</a>
-      <a href="#contact">Contact</a>
+      <a href="#campaign" class="nav-link">Campaign</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#experience" class="nav-link">Experience</a>
+      <a href="#skills" class="nav-link">Skills</a>
+      <a href="#projects" class="nav-link">Projects</a>
+      <a href="#gallery" class="nav-link">Gallery</a>
+      <a href="#merch" class="nav-link">Shop</a>
+      <a href="#testimonials" class="nav-link">Testimonials</a>
+      <a href="#contact" class="nav-link">Contact</a>
     </div>
   </nav>
 
@@ -140,7 +149,7 @@
         <div class="merch-card-inner">
           <div class="merch-icon"><i data-lucide="shopping-bag" class="w-7 h-7"></i></div>
           <div class="flex-1 text-center md:text-left">
-            <p class="section-eyebrow mb-2">NIL Apparel</p>
+            <p class="section-eyebrow mb-2">Kericho County · Kenya</p>
             <h2 data-template-id="merch-heading" class="canva-text font-heading font-bold text-2xl md:text-3xl text-primary dark:text-white mb-3"></h2>
             <p data-template-id="merch-desc" class="canva-text text-body max-w-2xl"></p>
           </div>
@@ -154,7 +163,7 @@
   <section id="about" class="py-20 md:py-24">
     <div class="max-w-7xl mx-auto px-4">
       <div class="fade-up section-header">
-        <p class="section-eyebrow">Profile</p>
+        <p class="section-eyebrow">Kedowa/Kimugul Ward</p>
         <h2 data-template-id="about-heading" class="canva-text section-title font-heading"></h2>
         <div class="section-line"></div>
       </div>
@@ -189,7 +198,7 @@
   <section id="experience" class="py-20 md:py-24 section-alt">
     <div class="max-w-7xl mx-auto px-4">
       <div class="fade-up section-header">
-        <p class="section-eyebrow">Career</p>
+        <p class="section-eyebrow">Kericho County, Kenya</p>
         <h2 data-template-id="experience-heading" class="canva-text section-title font-heading"></h2>
         <div class="section-line"></div>
       </div>
@@ -244,7 +253,7 @@
   <section id="education" class="py-20 md:py-24">
     <div class="max-w-7xl mx-auto px-4">
       <div class="fade-up section-header">
-        <p class="section-eyebrow">Academic</p>
+        <p class="section-eyebrow">Education in Kenya</p>
         <h2 data-template-id="education-heading" class="canva-text section-title font-heading"></h2>
         <div class="section-line"></div>
       </div>
@@ -278,7 +287,7 @@
   <section id="skills" class="py-20 md:py-24 section-alt">
     <div class="max-w-7xl mx-auto px-4">
       <div class="fade-up section-header">
-        <p class="section-eyebrow">Expertise</p>
+        <p class="section-eyebrow">Serving the Ward</p>
         <h2 data-template-id="skills-heading" class="canva-text section-title font-heading"></h2>
         <div class="section-line"></div>
       </div>
@@ -347,7 +356,7 @@
   <section id="projects" class="py-20 md:py-24">
     <div class="max-w-7xl mx-auto px-4">
       <div class="fade-up section-header">
-        <p class="section-eyebrow">Initiatives</p>
+        <p class="section-eyebrow">Ward Development</p>
         <h2 data-template-id="projects-heading" class="canva-text section-title font-heading"></h2>
         <div class="section-line"></div>
       </div>
@@ -390,7 +399,7 @@
   <section id="gallery" class="py-20 md:py-24 section-alt">
     <div class="max-w-7xl mx-auto px-4">
       <div class="fade-up section-header">
-        <p class="section-eyebrow">Moments</p>
+        <p class="section-eyebrow">Kericho & the Ward</p>
         <h2 data-template-id="gallery-heading" class="canva-text section-title font-heading"></h2>
         <div class="section-line"></div>
       </div>
@@ -409,7 +418,7 @@
   <section id="testimonials" class="py-20 md:py-24">
     <div class="max-w-7xl mx-auto px-4">
       <div class="fade-up section-header">
-        <p class="section-eyebrow">Voices</p>
+        <p class="section-eyebrow">From Kedowa/Kimugul</p>
         <h2 data-template-id="testimonials-heading" class="canva-text section-title font-heading"></h2>
         <div class="section-line"></div>
       </div>
@@ -443,7 +452,7 @@
   <section id="impact" class="py-20 md:py-24 counter-section">
     <div class="max-w-7xl mx-auto px-4 relative z-10">
       <div class="fade-up section-header mb-14">
-        <p class="section-eyebrow text-white/60">Impact</p>
+        <p class="section-eyebrow text-white/60">Kericho County</p>
         <h2 data-template-id="impact-heading" class="canva-text font-heading font-bold text-3xl md:text-4xl text-white section-title !text-white"></h2>
       </div>
       <div class="fade-up grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-white">
@@ -471,7 +480,7 @@
   <section id="awards" class="py-20 md:py-24 section-alt">
     <div class="max-w-7xl mx-auto px-4">
       <div class="fade-up section-header">
-        <p class="section-eyebrow">Recognition</p>
+        <p class="section-eyebrow">Honours in Kenya</p>
         <h2 data-template-id="awards-heading" class="canva-text section-title font-heading"></h2>
         <div class="section-line"></div>
       </div>
@@ -499,7 +508,7 @@
   <section id="faq" class="py-20 md:py-24">
     <div class="max-w-3xl mx-auto px-4">
       <div class="fade-up section-header">
-        <p class="section-eyebrow">Questions</p>
+        <p class="section-eyebrow">Kedowa/Kimugul Ward</p>
         <h2 data-template-id="faq-heading" class="canva-text section-title font-heading"></h2>
         <div class="section-line"></div>
       </div>
@@ -539,25 +548,30 @@
   <section id="contact" class="py-20 md:py-24 section-alt">
     <div class="max-w-7xl mx-auto px-4">
       <div class="fade-up section-header">
-        <p class="section-eyebrow">Get in Touch</p>
+        <p class="section-eyebrow">Kericho County, Kenya</p>
         <h2 data-template-id="contact-heading" class="canva-text section-title font-heading"></h2>
         <div class="section-line"></div>
       </div>
       <div class="fade-up max-w-2xl mx-auto">
         <div class="contact-form-wrap">
-          <form id="contact-form" class="space-y-5">
+          <form id="contact-form" class="space-y-5" method="post" action="#" novalidate autocomplete="on">
+            <div class="sr-only" aria-hidden="true">
+              <label for="contact-website">Leave this field empty</label>
+              <input id="contact-website" name="website" type="text" tabindex="-1" autocomplete="off">
+            </div>
             <div>
               <label data-template-id="contact-name-label" for="contact-name" class="canva-text form-label block"></label>
-              <input id="contact-name" type="text" required class="form-input">
+              <input id="contact-name" name="contact-name" type="text" required minlength="2" maxlength="100" autocomplete="name" class="form-input">
             </div>
             <div>
               <label data-template-id="contact-email-label" for="contact-email" class="canva-text form-label block"></label>
-              <input id="contact-email" type="email" required class="form-input">
+              <input id="contact-email" name="contact-email" type="email" required maxlength="254" autocomplete="email" inputmode="email" spellcheck="false" class="form-input">
             </div>
             <div>
               <label data-template-id="contact-message-label" for="contact-message" class="canva-text form-label block"></label>
-              <textarea id="contact-message" rows="5" required class="form-input resize-none"></textarea>
+              <textarea id="contact-message" name="contact-message" rows="5" required minlength="10" maxlength="2000" autocomplete="off" class="form-input resize-none"></textarea>
             </div>
+            <p id="contact-error" class="hidden text-sm text-red-600 dark:text-red-400" role="alert"></p>
             <button data-template-id="contact-submit-btn" type="submit" class="canva-button btn btn-primary w-full"></button>
           </form>
           <div id="contact-success" class="hidden mt-6 p-4 bg-secondary/10 text-secondary rounded-lg text-center font-medium">
@@ -565,11 +579,11 @@
           </div>
         </div>
         <div class="flex justify-center gap-4 mt-10">
-          <a href="mailto:edisonkipkemoi319@gmail.com" aria-label="Email" class="social-link"><i data-lucide="mail" class="w-5 h-5"></i></a>
-          <a href="tel:+254710241295" aria-label="Phone" class="social-link"><i data-lucide="phone" class="w-5 h-5"></i></a>
+          <a href="mailto:edisonkipkemoi319@gmail.com" aria-label="Email" class="social-link" rel="noopener"><i data-lucide="mail" class="w-5 h-5"></i></a>
+          <a href="tel:+254710241295" aria-label="Phone" class="social-link" rel="noopener"><i data-lucide="phone" class="w-5 h-5"></i></a>
           <a data-link-id="merch" aria-label="Shop official merch" class="social-link"><i data-lucide="shopping-bag" class="w-5 h-5"></i></a>
-          <a href="#" aria-label="LinkedIn" class="social-link"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
-          <a href="#" aria-label="Twitter" class="social-link"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+          <span class="social-link social-link--disabled" aria-label="LinkedIn (coming soon)" aria-disabled="true"><i data-lucide="linkedin" class="w-5 h-5"></i></span>
+          <span class="social-link social-link--disabled" aria-label="Twitter (coming soon)" aria-disabled="true"><i data-lucide="twitter" class="w-5 h-5"></i></span>
         </div>
       </div>
     </div>
@@ -580,8 +594,8 @@
     <div class="max-w-7xl mx-auto px-4 text-center space-y-5">
       <p data-template-id="footer-text" class="canva-text text-sm text-white/50"></p>
       <div class="flex justify-center gap-8 text-xs">
-        <a href="#" data-template-id="footer-privacy" class="canva-link footer-link"></a>
-        <a href="#" data-template-id="footer-terms" class="canva-link footer-link"></a>
+        <span data-template-id="footer-privacy" class="canva-text footer-link footer-link--static"></span>
+        <span data-template-id="footer-terms" class="canva-text footer-link footer-link--static"></span>
       </div>
     </div>
   </footer>
@@ -590,6 +604,7 @@
     <i data-lucide="chevron-up" class="w-5 h-5"></i>
   </button>
 
+  <script src="security.js"></script>
   <script src="content.js"></script>
   <script src="script.js"></script>
 </body>
