@@ -1,3 +1,33 @@
+const SITE_CONFIG = {
+    siteName: 'Basil Koech',
+    siteTitle: 'Basil Koech — MCA Aspirant, Kedowa/Kimugul Ward, Kericho County, Kenya 2027',
+    siteDescription: 'Basil Koech — Kenyan leader vying for MCA in Kedowa/Kimugul Ward, Kericho County. Grassroots development, accountable governance, and ward-first leadership for 2027.',
+    ogImage: 'assets/images/hero-portrait.jpg',
+};
+
+const SITE_CONTACT = {
+    email: 'edisonkipkemoi319@gmail.com',
+    phone: '+254710241295',
+};
+
+const SITE_SKILLS = [
+    { name: 'Ward Leadership', emphasis: 'Core Strength', width: 95, color: 'primary' },
+    { name: 'Public Speaking & Baraza Engagement', emphasis: 'Key Priority', width: 90, color: 'secondary' },
+    { name: 'Community Mobilisation', emphasis: 'Active Focus', width: 88, color: 'accent' },
+    { name: 'Youth Empowerment', emphasis: 'Core Strength', width: 92, color: 'primary' },
+    { name: 'Strategic Planning', emphasis: 'Key Priority', width: 87, color: 'secondary' },
+    { name: 'Mentorship', emphasis: 'Active Focus', width: 93, color: 'accent' },
+    { name: 'Grassroots Organising', emphasis: 'Core Strength', width: 89, color: 'primary' },
+    { name: 'Development Advocacy', emphasis: 'Key Priority', width: 85, color: 'secondary' },
+];
+
+const SITE_STATS = [
+    { target: 500, suffix: '+', labelKey: 'impact-stat-1' },
+    { target: 30, suffix: '+', labelKey: 'impact-stat-2' },
+    { target: 5, suffix: '+', labelKey: 'impact-stat-3' },
+    { target: 12, suffix: '+', labelKey: 'impact-stat-4' },
+];
+
 const SITE_CONTENT = {
     'brand-tagline': 'Kedowa/Kimugul · Kericho County',
     'hero-campaign-badge': 'MCA Aspirant — Kedowa/Kimugul Ward, Kericho County · Kenya 2027',
@@ -52,14 +82,6 @@ const SITE_CONTENT = {
     'edu-3-detail': 'Cross-country champion · Kericho County · Londiani Boys High School',
 
     'skills-heading': 'Strengths for Kedowa/Kimugul Ward',
-    'skill-1-name': 'Ward Leadership',
-    'skill-2-name': 'Public Speaking & Baraza Engagement',
-    'skill-3-name': 'Community Mobilisation',
-    'skill-4-name': 'Youth Empowerment',
-    'skill-5-name': 'Strategic Planning',
-    'skill-6-name': 'Mentorship',
-    'skill-7-name': 'Grassroots Organising',
-    'skill-8-name': 'Development Advocacy',
 
     'projects-heading': 'Ward & County Initiatives',
     'project-1-title': 'Kedowa/Kimugul Ward Outreach',
@@ -110,6 +132,8 @@ const SITE_CONTENT = {
     'contact-message-label': 'Your Message',
     'contact-submit-btn': 'Send Message',
     'contact-success-msg': 'Asante! Your message has been received. Together we will build a stronger Kedowa/Kimugul Ward in Kericho County, Kenya.',
+    'contact-error-generic': 'Something went wrong. Please try again or email us directly.',
+    'contact-sending': 'Sending…',
 
     'merch-heading': 'Support the Campaign',
     'merch-desc': 'Purchase official Basil Koech merchandise and help fuel the journey to serve Kedowa/Kimugul Ward, Kericho County, Kenya in the 2027 MCA election.',
@@ -138,6 +162,92 @@ const SITE_IMAGES = {
     'gallery-img-6': 'assets/images/gallery-6.jpg',
 };
 
+function populateMetaTags() {
+    const origin = window.location.origin;
+    const pageUrl = origin + window.location.pathname;
+    const imagePath = SITE_CONFIG.ogImage;
+    const imageUrl = SiteSecurity.isSafeImageSrc(imagePath) ? origin + '/' + imagePath.replace(/^\.\//, '') : '';
+
+    const setMeta = (selector, content) => {
+        if (!content) return;
+        document.querySelectorAll(selector).forEach(el => { el.setAttribute('content', content); });
+    };
+
+    setMeta('meta[name="description"]', SITE_CONFIG.siteDescription);
+    setMeta('meta[property="og:title"]', SITE_CONFIG.siteTitle);
+    setMeta('meta[property="og:description"]', SITE_CONFIG.siteDescription);
+    setMeta('meta[property="og:url"]', pageUrl);
+    setMeta('meta[property="og:image"]', imageUrl);
+    setMeta('meta[name="twitter:title"]', SITE_CONFIG.siteTitle);
+    setMeta('meta[name="twitter:description"]', SITE_CONFIG.siteDescription);
+    setMeta('meta[name="twitter:image"]', imageUrl);
+
+    const canonical = document.querySelector('link[rel="canonical"]');
+    if (canonical) canonical.href = pageUrl;
+}
+
+function populateContactLinks() {
+    document.querySelectorAll('[data-contact="email"]').forEach(el => {
+        el.href = 'mailto:' + SITE_CONTACT.email;
+        el.setAttribute('aria-label', 'Email ' + SITE_CONTACT.email);
+    });
+    document.querySelectorAll('[data-contact="phone"]').forEach(el => {
+        el.href = 'tel:' + SITE_CONTACT.phone.replace(/\s/g, '');
+        el.setAttribute('aria-label', 'Phone ' + SITE_CONTACT.phone);
+    });
+}
+
+function populateFooterLinks() {
+    document.querySelectorAll('[data-footer-link="privacy"]').forEach(el => {
+        el.href = 'privacy.html';
+    });
+    document.querySelectorAll('[data-footer-link="terms"]').forEach(el => {
+        el.href = 'terms.html';
+    });
+}
+
+function populateSkillsGrid() {
+    const grid = document.getElementById('skills-grid');
+    if (!grid || !Array.isArray(SITE_SKILLS)) return;
+
+    const colorClass = { primary: '', secondary: 'bg-secondary', accent: 'bg-accent' };
+
+    grid.innerHTML = SITE_SKILLS.map(skill => {
+        const fillClass = colorClass[skill.color] || '';
+        const width = SiteSecurity.clampPercent(skill.width);
+        const name = SiteSecurity.sanitizeText(skill.name, 80);
+        const emphasis = SiteSecurity.sanitizeText(skill.emphasis, 40);
+        return `<div class="skill-item space-y-2">
+          <div class="flex justify-between items-center gap-3">
+            <span class="font-medium text-sm">${name}</span>
+            <span class="skill-emphasis">${emphasis}</span>
+          </div>
+          <div class="skill-bar"><div class="progress-fill ${fillClass}" data-width="${width}"></div></div>
+        </div>`;
+    }).join('');
+}
+
+function populateImpactStats() {
+    const container = document.getElementById('impact-stats');
+    if (!container || !Array.isArray(SITE_STATS)) return;
+
+    container.innerHTML = SITE_STATS.map(stat => {
+        const target = Math.max(0, Math.min(999999, Number(stat.target) || 0));
+        const suffix = SiteSecurity.sanitizeText(stat.suffix || '', 8);
+        const label = SITE_CONTENT[stat.labelKey] || '';
+        return `<div class="stat-item">
+          <p class="count text-4xl md:text-5xl" data-target="${target}" data-suffix="${suffix}">0</p>
+          <p data-template-id="${stat.labelKey}" class="canva-text mt-2 text-sm text-white/70">${SiteSecurity.sanitizeText(label, 120)}</p>
+        </div>`;
+    }).join('');
+}
+
+function getFormSubmitEndpoint() {
+    const email = SITE_CONTACT.email;
+    if (!SiteSecurity.isValidEmail(email)) return null;
+    return 'https://formsubmit.co/ajax/' + encodeURIComponent(email);
+}
+
 function populateContent() {
     Object.entries(SITE_CONTENT).forEach(([id, text]) => {
         document.querySelectorAll(`[data-template-id="${id}"]`).forEach(el => {
@@ -158,4 +268,9 @@ function populateContent() {
             SiteSecurity.applyExternalLink(el, url);
         });
     });
+    populateSkillsGrid();
+    populateImpactStats();
+    populateContactLinks();
+    populateFooterLinks();
+    populateMetaTags();
 }

@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     if (typeof populateContent === 'function') populateContent();
 
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const html = document.documentElement;
     const toggle = document.getElementById('theme-toggle');
     const storedTheme = localStorage.getItem('theme');
@@ -13,14 +14,29 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    function setMobileMenuOpen(open) {
+        if (!mobileMenu || !mobileBtn) return;
+        mobileMenu.classList.toggle('hidden', !open);
+        mobileBtn.setAttribute('aria-expanded', String(open));
+        mobileBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    }
+
     if (mobileBtn) mobileBtn.addEventListener('click', () => {
-        const mm = document.getElementById('mobile-menu');
-        if (mm) mm.classList.toggle('hidden');
+        setMobileMenuOpen(mobileMenu.classList.contains('hidden'));
     });
+
     document.querySelectorAll('#mobile-menu a').forEach(a => a.addEventListener('click', () => {
-        const mm = document.getElementById('mobile-menu');
-        if (mm) mm.classList.add('hidden');
+        setMobileMenuOpen(false);
     }));
+
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && mobileMenu && !mobileMenu.classList.contains('hidden')) {
+            setMobileMenuOpen(false);
+            mobileBtn?.focus();
+        }
+    });
 
     document.querySelectorAll('a[href^="#"]').forEach(a => {
         a.addEventListener('click', e => {
@@ -28,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!href || href === '#' || !SiteSecurity.isSafeFragment(href)) return;
             e.preventDefault();
             const target = document.querySelector(href);
-            if (target) target.scrollIntoView({ behavior: 'smooth' });
+            if (target) target.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' });
         });
     });
 
@@ -36,7 +52,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let pi = 0, ci = 0, deleting = false;
     const typedEl = document.getElementById('typed-text');
     function typeLoop() {
-        if (!typedEl) return;
+        if (!typedEl || prefersReducedMotion) {
+            if (typedEl && prefersReducedMotion) typedEl.textContent = phrases[0];
+            return;
+        }
         const word = phrases[pi];
         typedEl.textContent = deleting ? word.slice(0, ci--) : word.slice(0, ci++);
         if (!deleting && ci > word.length) { setTimeout(() => { deleting = true; typeLoop(); }, 1500); return; }
@@ -54,7 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach(e => {
             if (e.isIntersecting) {
                 e.target.querySelectorAll('.progress-fill').forEach(bar => {
-                    bar.style.width = SiteSecurity.clampPercent(bar.dataset.width) + '%';
+                    const width = SiteSecurity.clampPercent(bar.dataset.width);
+                    bar.style.width = prefersReducedMotion ? width + '%' : width + '%';
                 });
                 skillObs.unobserve(e.target);
             }
@@ -69,6 +89,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.target.querySelectorAll('.count').forEach(el => {
                     const target = Math.max(0, Math.min(999999, Number(el.dataset.target) || 0));
                     const suffix = SiteSecurity.sanitizeText(el.dataset.suffix || '', 8);
+                    if (prefersReducedMotion) {
+                        el.textContent = target.toLocaleString() + suffix;
+                        return;
+                    }
                     const step = Math.max(1, Math.ceil(target / 60));
                     let current = 0;
                     const timer = setInterval(() => {
@@ -85,6 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (impactEl) counterObs.observe(impactEl);
 
     let tIdx = 0;
+    let testimonialTimer = null;
     const track = document.getElementById('testimonial-track');
     const dots = document.querySelectorAll('.testimonial-dot');
     const slideCount = dots.length || 1;
@@ -92,10 +117,21 @@ document.addEventListener('DOMContentLoaded', () => {
         const index = ((Number(i) % slideCount) + slideCount) % slideCount;
         tIdx = index;
         if (track) track.style.transform = `translateX(-${index * 100}%)`;
-        dots.forEach((d, j) => d.classList.toggle('active', j === index));
+        dots.forEach((d, j) => {
+            d.classList.toggle('active', j === index);
+            d.setAttribute('aria-current', j === index ? 'true' : 'false');
+        });
     }
     dots.forEach(d => d.addEventListener('click', () => goToSlide(d.dataset.index)));
-    if (slideCount > 1) setInterval(() => goToSlide(tIdx + 1), 5000);
+    if (slideCount > 1 && !prefersReducedMotion) {
+        testimonialTimer = setInterval(() => goToSlide(tIdx + 1), 5000);
+        document.getElementById('testimonials')?.addEventListener('mouseenter', () => {
+            if (testimonialTimer) clearInterval(testimonialTimer);
+        });
+        document.getElementById('testimonials')?.addEventListener('mouseleave', () => {
+            if (!prefersReducedMotion) testimonialTimer = setInterval(() => goToSlide(tIdx + 1), 5000);
+        });
+    }
 
     const navbar = document.getElementById('navbar');
     const navLinks = document.querySelectorAll('.nav-link');
@@ -128,14 +164,20 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', () => {
             const item = btn.parentElement;
             const open = item.classList.contains('open');
-            document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('open'));
-            if (!open) item.classList.add('open');
-            btn.setAttribute('aria-expanded', String(!open));
+            document.querySelectorAll('.accordion-item').forEach(i => {
+                i.classList.remove('open');
+                i.querySelector('.accordion-trigger')?.setAttribute('aria-expanded', 'false');
+            });
+            if (!open) {
+                item.classList.add('open');
+                btn.setAttribute('aria-expanded', 'true');
+            }
         });
     });
 
     const contactForm = document.getElementById('contact-form');
     const contactError = document.getElementById('contact-error');
+    const contactSubmitBtn = contactForm?.querySelector('[type="submit"]');
     const RATE_LIMIT_MS = 60000;
 
     function showContactError(message) {
@@ -148,7 +190,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (contactError) contactError.classList.add('hidden');
     }
 
-    if (contactForm) contactForm.addEventListener('submit', e => {
+    function showContactSuccess() {
+        contactForm?.classList.add('hidden');
+        const success = document.getElementById('contact-success');
+        if (success) success.classList.remove('hidden');
+    }
+
+    if (contactForm) contactForm.addEventListener('submit', async e => {
         e.preventDefault();
         hideContactError();
 
@@ -178,13 +226,47 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        sessionStorage.setItem('contactLastSubmit', String(Date.now()));
-        contactForm.classList.add('hidden');
-        const success = document.getElementById('contact-success');
-        if (success) success.classList.remove('hidden');
+        const endpoint = typeof getFormSubmitEndpoint === 'function' ? getFormSubmitEndpoint() : null;
+        if (!endpoint || !SiteSecurity.isSafeFormEndpoint(endpoint)) {
+            showContactError(SITE_CONTENT['contact-error-generic'] || 'Unable to send message. Please email us directly.');
+            return;
+        }
+
+        const originalBtnText = contactSubmitBtn?.textContent;
+        if (contactSubmitBtn) {
+            contactSubmitBtn.disabled = true;
+            contactSubmitBtn.textContent = SITE_CONTENT['contact-sending'] || 'Sending…';
+        }
+
+        try {
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+                body: JSON.stringify({
+                    name,
+                    email,
+                    message,
+                    _subject: 'Campaign contact from ' + name,
+                    _template: 'table',
+                    _captcha: 'false',
+                }),
+            });
+
+            if (!response.ok) throw new Error('Form submit failed');
+
+            sessionStorage.setItem('contactLastSubmit', String(Date.now()));
+            showContactSuccess();
+        } catch {
+            showContactError(SITE_CONTENT['contact-error-generic'] || 'Something went wrong. Please try again or email us directly.');
+        } finally {
+            if (contactSubmitBtn) {
+                contactSubmitBtn.disabled = false;
+                if (originalBtnText) contactSubmitBtn.textContent = originalBtnText;
+            }
+        }
     });
 
-    if (btt) btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    if (btt) btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' }));
 
     if (window.lucide && lucide.createIcons) lucide.createIcons();
 });

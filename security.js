@@ -65,6 +65,16 @@ const SiteSecurity = (() => {
         return true;
     }
 
+    function isSafeFormEndpoint(url) {
+        if (typeof url !== 'string' || !url.startsWith('https://formsubmit.co/ajax/')) return false;
+        try {
+            const parsed = new URL(url);
+            return parsed.hostname === 'formsubmit.co' && parsed.protocol === 'https:';
+        } catch {
+            return false;
+        }
+    }
+
     return {
         isSafeFragment,
         isSafeExternalUrl,
@@ -74,6 +84,7 @@ const SiteSecurity = (() => {
         isValidTheme,
         clampPercent,
         applyExternalLink,
+        isSafeFormEndpoint,
         stripControlChars,
     };
 })();

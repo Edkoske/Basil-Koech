@@ -641,6 +641,18 @@ h1, h2, h3, h4, h5, h6 {
     background: linear-gradient(90deg, var(--accent), var(--accent-light));
 }
 
+.skill-emphasis {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--accent);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.dark .skill-emphasis { color: var(--accent-light); }
+
 .skill-pct {
     font-size: 0.8rem;
     font-weight: 600;
@@ -900,6 +912,27 @@ h1, h2, h3, h4, h5, h6 {
 .footer-link--static {
     color: rgba(255, 255, 255, 0.35);
     cursor: default;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+
+    .fade-up {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    .typing-cursor { animation: none; }
+
+    .campaign-badge::before { animation: none; }
+
+    .progress-fill { transition: none; }
+
+    .testimonial-track { transition: none; }
+
+    .project-card img,
+    .gallery-item img { transition: none; }
 }
 
 .sr-only {
